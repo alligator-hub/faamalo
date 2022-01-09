@@ -26,6 +26,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.*;
 
 @Service
@@ -126,7 +128,10 @@ public class ImageSenderService {
             //todo rasmni yuklab olib BufferedImage ga olish qismi (bu template)
             BufferedImage tempBuffImg = null;
             try {
-                tempBuffImg = ImageIO.read(new File(noReadyImagesFolder + templateDto.getFileId()));
+                System.err.println(noReadyImagesFolder);
+                System.err.println(templateDto.getFileId());
+                System.err.println(noReadyImagesFolder + templateDto.getFileId());
+                tempBuffImg = ImageIO.read(Objects.requireNonNull(getFileFromResourceAsStream(noReadyImagesFolder + templateDto.getFileId())));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -166,6 +171,20 @@ public class ImageSenderService {
         return newReadyPhotoList;
     }
 
+    private InputStream getFileFromResourceAsStream(String fileName) {
+
+        // The class loader that loaded the class
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+
+        // the stream holding the file content
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+    }
+
 
     private String getPrintedImagePath(String text, BufferedImage tempBuffImg, TemplateDto templateDto) {
 
@@ -177,7 +196,8 @@ public class ImageSenderService {
 
 
         if (readyBufferedImage != null) {
-            String readyImagePath = readyToSendFolder + UUID.randomUUID() + ".jpeg";
+            String readyImagePath = readyToSendFolder  + UUID.randomUUID() + ".jpeg";
+
             try {
                 ImageIO.write(readyBufferedImage, "jpeg", new File(readyImagePath));
             } catch (IOException e) {

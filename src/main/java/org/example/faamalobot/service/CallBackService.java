@@ -10,16 +10,15 @@ import org.example.faamalobot.model.UpdateDto;
 import org.example.faamalobot.repo.FollowerRepo;
 import org.example.faamalobot.repo.NameBaseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageMedia;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.*;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Comparator;
 import java.util.List;
@@ -52,6 +51,10 @@ public class CallBackService {
     @Autowired
     ImageSenderService imageSenderService;
 
+    @Autowired
+    @Lazy
+    LocationService locationService;
+
 
     public void map(UpdateDto updateDto) {
         String data = updateDto.getQuery().getData();
@@ -75,6 +78,12 @@ public class CallBackService {
 
         if (data.equals(QueryData.COUNTING_NEW_YEAR.getData())) {
             countingNewYear(updateDto);
+        }
+
+        if (data.equals(QueryData.SET_TIME.getData())) {
+            Message send = sender.send(maker.make(updateDto.getChatId(), Statics.GIVE_LOCATION_MSG.getValue(), boardService.sendLocation()));
+            locationService.addMessageForDelete(updateDto.getChatId(), send.getMessageId());
+            System.out.println(locationService);
         }
 
         if (data.equals(QueryData.COUNTING_JUMA.getData())) {
@@ -246,22 +255,53 @@ public class CallBackService {
     }
 
     public void countingNewYear(UpdateDto updateDto) {
-        LocalDateTime fromDateTime = LocalDateTime.now();
-        LocalDateTime toDateTime = LocalDateTime.of(LocalDate.now().getYear() + 1, Month.JANUARY, 1, 0, 0, 0);
+        LocalDateTime fromDateTime;
 
-        String readyTemplate = Statics.newYearCountingTemplate(defaultService.getBetweenTwoTime(fromDateTime, toDateTime));
+
+        Optional<Follower> followerOptional = followerRepo.findByChatId(updateDto.getChatId());
+        String zoneId = null;
+        if (followerOptional.isPresent()) {
+            Follower follower = followerOptional.get();
+            zoneId = follower.getTimeZoneId();
+        }
+
+        if (zoneId != null) {
+            fromDateTime = LocalDateTime.now(ZoneId.of(zoneId));
+        } else {
+            fromDateTime = LocalDateTime.now(ZoneOffset.UTC);
+        }
+
+        LocalDateTime toDateTime = LocalDateTime.of(fromDateTime.getYear() + 1, Month.JANUARY, 1, 0, 0, 0);
+
+
+        String readyTemplate = Statics.newYearCountingTemplate(defaultService.getBetweenTwoTime(fromDateTime, toDateTime, zoneId));
 
         sender.send(maker.make(updateDto.getChatId(), readyTemplate, boardService.mainMenuNewYear()));
     }
 
     public void countingJuma(UpdateDto updateDto) {
-        LocalDateTime fromDateTime = LocalDateTime.now();
+        LocalDateTime fromDateTime;
+        Optional<Follower> followerOptional = followerRepo.findByChatId(updateDto.getChatId());
+
+        String zoneId = null;
+        if (followerOptional.isPresent()) {
+            Follower follower = followerOptional.get();
+            zoneId = follower.getTimeZoneId();
+        }
+
+        if (zoneId != null) {
+            fromDateTime = LocalDateTime.now(ZoneId.of(zoneId));
+        } else {
+            fromDateTime = LocalDateTime.now(ZoneOffset.UTC);
+        }
+
         LocalDateTime toDateTime = fromDateTime.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+
         toDateTime = toDateTime.withHour(0);
         toDateTime = toDateTime.withMinute(0);
         toDateTime = toDateTime.withSecond(0);
 
-        String readyTemplate = Statics.jumaCountingTemplate(defaultService.getBetweenTwoTime(fromDateTime, toDateTime));
+        String readyTemplate = Statics.jumaCountingTemplate(defaultService.getBetweenTwoTime(fromDateTime, toDateTime, zoneId));
 
         sender.send(maker.make(updateDto.getChatId(), readyTemplate, boardService.mainMenuIslamic()));
     }

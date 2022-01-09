@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
 import java.io.File;
@@ -32,6 +33,19 @@ public class MessageMaker {
     public SendMessage make(Long chatId, String message, InlineKeyboardMarkup board) {
         SendMessage sendMessage = new SendMessage(String.valueOf(chatId), message);
         sendMessage.setReplyMarkup(board);
+        sendMessage.setParseMode(ParseMode.HTML);
+        return sendMessage;
+    }
+    public SendMessage make(Long chatId, String message, ReplyKeyboardMarkup board) {
+        SendMessage sendMessage = new SendMessage(String.valueOf(chatId), message);
+        sendMessage.setReplyMarkup(board);
+        sendMessage.setParseMode(ParseMode.HTML);
+        return sendMessage;
+    }
+
+    public SendMessage make(Long chatId, String message, ReplyKeyboardRemove remove) {
+        SendMessage sendMessage = new SendMessage(String.valueOf(chatId), message);
+        sendMessage.setReplyMarkup(remove);
         sendMessage.setParseMode(ParseMode.HTML);
         return sendMessage;
     }

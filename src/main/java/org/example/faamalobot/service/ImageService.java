@@ -5,15 +5,15 @@ import org.example.faamalobot.model.TemplateDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class ImageService {
@@ -69,7 +69,8 @@ public class ImageService {
     public Font getFont(String pathTTf, float size, int fontType) {
         Font font = null;
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File(pathTTf));
+            InputStream fontInputStream = getFileFromResourceAsStream(pathTTf);
+            font  = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(fontInputStream));
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
@@ -142,4 +143,20 @@ public class ImageService {
 
         return null;
     }
+
+    private InputStream getFileFromResourceAsStream(String fileName) {
+
+        // The class loader that loaded the class
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+
+        // the stream holding the file content
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+
+    }
+
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -20,6 +21,8 @@ public class UpdateDto {
     private String username;
     private Integer messageId;
     private Update update;
+    private Location location;
+    private boolean isLocation;
     private boolean isCallBackQuery;
     private boolean isTextMessage;
     private List<PhotoSize> photoSizeList;
@@ -99,6 +102,22 @@ public class UpdateDto {
         isTextMessage = textMessage;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public boolean isLocation() {
+        return isLocation;
+    }
+
+    public void isLocation(boolean location) {
+        isLocation = location;
+    }
+
     public String getText() {
         return text;
     }
@@ -114,4 +133,6 @@ public class UpdateDto {
     public void setQuery(CallbackQuery query) {
         this.query = query;
     }
+
+
 }

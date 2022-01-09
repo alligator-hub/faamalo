@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum QueryData {
+    SET_TIME("set-time", "\uD83D\uDD50 Vaqt sozlamalarini o`rnatish \uD83D\uDD50"),
     COUNTING_NEW_YEAR("count-new-year", "❄️ Yangi yil gacha  ❄"),
     COUNTING_JUMA("count-juma", "🕋️  Juma gacha  🕋️"),
 

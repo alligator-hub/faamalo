@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.faamalobot.model.UpdateDto;
 import org.example.faamalobot.service.CallBackService;
 import org.example.faamalobot.service.DefaultService;
+import org.example.faamalobot.service.LocationService;
 import org.example.faamalobot.service.TextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
@@ -28,6 +30,10 @@ public class MyBot extends TelegramLongPollingBot {
     @Autowired
     @Lazy
     TextService textService;
+
+    @Autowired
+    @Lazy
+    LocationService locationService;
 
     @Autowired
     @Lazy
@@ -51,6 +57,10 @@ public class MyBot extends TelegramLongPollingBot {
                 UpdateDto updateDto = getUpdateDtoFromMessage(update);
                 defaultService.receiveAction(updateDto);
                 textService.map(updateDto);
+            } else if (update.getMessage().hasLocation()) {
+                UpdateDto updateDto = getUpdateDtoFromMessageLocation(update);
+                defaultService.receiveAction(updateDto);
+                locationService.map(updateDto);
             }
         } else if (update.hasCallbackQuery()) {
             UpdateDto updateDto = getUpdateDtoFromCallBackQuery(update);
@@ -77,7 +87,28 @@ public class MyBot extends TelegramLongPollingBot {
         return updateDto;
     }
 
+    private UpdateDto getUpdateDtoFromMessageLocation(Update update) {
+        UpdateDto updateDto = new UpdateDto();
+        updateDto.setUpdate(update);
+
+        updateDto.setChatId(update.getMessage().getChatId());
+        updateDto.setMessageId(update.getMessage().getMessageId());
+
+        updateDto.isTextMessage(false);
+        updateDto.isCallBackQuery(false);
+        updateDto.isLocation(true);
+
+        updateDto.setLocation(update.getMessage().getLocation());
+
+        updateDto.setFirstname(update.getMessage().getChat().getFirstName());
+        updateDto.setLastname(update.getMessage().getChat().getLastName());
+        updateDto.setUsername(update.getMessage().getChat().getUserName());
+        return updateDto;
+    }
+
     private UpdateDto getUpdateDtoFromCallBackQuery(Update update) {
+
+
         UpdateDto updateDto = new UpdateDto();
         updateDto.setUpdate(update);
 

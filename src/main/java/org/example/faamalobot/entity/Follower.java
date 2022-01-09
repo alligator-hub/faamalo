@@ -36,4 +36,6 @@ public class Follower {
 
     private String firstMessageId;
 
+    private String timeZoneId;
+
 }

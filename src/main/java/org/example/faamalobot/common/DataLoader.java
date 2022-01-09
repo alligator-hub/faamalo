@@ -56,7 +56,7 @@ public class DataLoader implements CommandLineRunner {
 
             //todo new year templates
             templates.add(new Template(
-                    "/newYear/template1.jpg",
+                    "newYear/template1.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME, WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME),
                     false, 51, false, 67,
                     "pfd-bold",
@@ -67,7 +67,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-1"
             ));
             templates.add(new Template(
-                    "/newYear/template2.jpg",
+                    "newYear/template2.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME, WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME),
                     false, 50, false, 77,
                     "bebas-reg",
@@ -78,7 +78,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-2"
             ));
             templates.add(new Template(
-                    "/newYear/template3.jpg",
+                    "newYear/template3.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME, WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME),
                     false, 50, false, 45,
                     "bebas-reg",
@@ -89,7 +89,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-3"
             ));
             templates.add(new Template(
-                    "/newYear/template4.jpg",
+                    "newYear/template4.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME),
                     false, 50, false, 22,
                     "welc-christ",
@@ -100,7 +100,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-4"
             ));
             templates.add(new Template(
-                    "/newYear/template5.jpg",
+                    "newYear/template5.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME, WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME),
                     false, 50, false, 48,
                     "welc-christ",
@@ -111,7 +111,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-5"
             ));
             templates.add(new Template(
-                    "/newYear/template6.jpg",
+                    "newYear/template6.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME, WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME),
                     false, 48, false, 57,
                     "perf-christ",
@@ -122,7 +122,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-6"
             ));
             templates.add(new Template(
-                    "/newYear/template7.jpg",
+                    "newYear/template7.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME, WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME),
                     false, 50, true, 880,
                     "constan",
@@ -133,7 +133,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-7"
             ));
             templates.add(new Template(
-                    "/newYear/template8.jpg",
+                    "newYear/template8.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME, WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME),
                     false, 50, true, 820,
                     "constan",
@@ -144,7 +144,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-8"
             ));
             templates.add(new Template(
-                    "/newYear/template9.jpg",
+                    "newYear/template9.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME, WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME),
                     false, 50, false, 56,
                     "constan",
@@ -155,7 +155,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-9"
             ));
             templates.add(new Template(
-                    "/newYear/template10.jpg",
+                    "newYear/template10.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME, WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME),
                     false, 50, false, 50,
                     "comic-sans-ms",
@@ -166,7 +166,7 @@ public class DataLoader implements CommandLineRunner {
                     "new-year-temp-10"
             ));
             templates.add(new Template(
-                    "/newYear/template11.jpg",
+                    "newYear/template11.jpg",
                     List.of(WaitType.WAIT_FOR_NEW_YEAR_BOY_NAME, WaitType.WAIT_FOR_NEW_YEAR_GIRL_NAME),
                     false, 50, false, 53,
                     "constan",
@@ -179,7 +179,7 @@ public class DataLoader implements CommandLineRunner {
 
             //todo templates juma
             templates.add(new Template(
-                    "/juma/template1.jpg",
+                    "juma/template1.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_GROUP_NAME),
                     true, 2600, false, 63,
                     "myraid-pro-reg",
@@ -190,7 +190,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-1"
             ));
             templates.add(new Template(
-                    "/juma/template2.jpg",
+                    "juma/template2.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_BOY_NAME, WaitType.WAIT_FOR_JUMA_GIRL_NAME, WaitType.WAIT_FOR_JUMA_GROUP_NAME),
                     false, 50, false, 75,
                     "hid-demo",
@@ -201,7 +201,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-2"
             ));
             templates.add(new Template(
-                    "/juma/template3.jpg",
+                    "juma/template3.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_BOY_NAME, WaitType.WAIT_FOR_JUMA_GIRL_NAME),
                     false, 45, false, 63,
                     "hid-demo",
@@ -212,7 +212,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-3"
             ));
             templates.add(new Template(
-                    "/juma/template4.jpg",
+                    "juma/template4.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_BOY_NAME, WaitType.WAIT_FOR_JUMA_GIRL_NAME),
                     false, 50, false, 66,
                     "hid-demo",
@@ -223,7 +223,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-4"
             ));
             templates.add(new Template(
-                    "/juma/template5.jpg",
+                    "juma/template5.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_BOY_NAME, WaitType.WAIT_FOR_JUMA_GIRL_NAME, WaitType.WAIT_FOR_JUMA_GROUP_NAME),
                     false, 50, false, 63,
                     "amsi-light",
@@ -234,7 +234,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-5"
             ));
             templates.add(new Template(
-                    "/juma/template6.jpg",
+                    "juma/template6.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_BOY_NAME, WaitType.WAIT_FOR_JUMA_GIRL_NAME),
                     false, 50, false, 53,
                     "ds-arabic",
@@ -245,7 +245,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-6"
             ));
             templates.add(new Template(
-                    "/juma/template7.jpg",
+                    "juma/template7.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_BOY_NAME),
                     false, 50, false, 91,
                     "aid-fitri",
@@ -256,7 +256,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-7"
             ));
             templates.add(new Template(
-                    "/juma/template8.jpg",
+                    "juma/template8.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_GIRL_NAME),
                     false, 50, false, 80,
                     "ram-kar",
@@ -267,7 +267,7 @@ public class DataLoader implements CommandLineRunner {
                     "juma-temp-8"
             ));
             templates.add(new Template(
-                    "/juma/template9.jpg",
+                    "juma/template9.jpg",
                     List.of(WaitType.WAIT_FOR_JUMA_BOY_NAME),
                     false, 50, false, 80,
                     "ram-kar",
@@ -280,7 +280,7 @@ public class DataLoader implements CommandLineRunner {
 
             //todo birthday templates
             templates.add(new Template(
-                    "/birthday/template1.jpg",
+                    "birthday/template1.jpg",
                     List.of(WaitType.WAIT_FOR_BIRTH_BOY_NAME, WaitType.WAIT_FOR_BIRTH_GIRL_NAME),
                     false, 50, false, 48,
                     "comic",
@@ -291,7 +291,7 @@ public class DataLoader implements CommandLineRunner {
                     "birth-temp-1"
             ));
             templates.add(new Template(
-                    "/birthday/template2.jpg",
+                    "birthday/template2.jpg",
                     List.of(WaitType.WAIT_FOR_BIRTH_BOY_NAME, WaitType.WAIT_FOR_BIRTH_GIRL_NAME),
                     false, 50, false, 19,
                     "georgia",
@@ -302,7 +302,7 @@ public class DataLoader implements CommandLineRunner {
                     "birth-temp-2"
             ));
             templates.add(new Template(
-                    "/birthday/template3.jpg",
+                    "birthday/template3.jpg",
                     List.of(WaitType.WAIT_FOR_BIRTH_BOY_NAME, WaitType.WAIT_FOR_BIRTH_GIRL_NAME),
                     true, 70, false, 36,
                     "patrick",
@@ -313,7 +313,7 @@ public class DataLoader implements CommandLineRunner {
                     "birth-temp-3"
             ));
             templates.add(new Template(
-                    "/birthday/template4.jpg",
+                    "birthday/template4.jpg",
                     List.of(WaitType.WAIT_FOR_BIRTH_BOY_NAME, WaitType.WAIT_FOR_BIRTH_GIRL_NAME),
                     false, 51, false, 29,
                     "georgia",

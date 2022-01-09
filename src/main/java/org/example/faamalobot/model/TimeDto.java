@@ -13,4 +13,5 @@ public class TimeDto {
     private Integer hours;
     private Integer minutes;
     private Integer seconds;
+    private String zoneId;
 }

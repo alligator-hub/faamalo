@@ -6,7 +6,10 @@ import org.example.faamalobot.enums.RequestType;
 import org.example.faamalobot.model.PhotoDto;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,11 @@ public class BoardService {
     public InlineKeyboardMarkup startBoard() {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+
+        InlineKeyboardButton btnSetTime = new InlineKeyboardButton();
+        btnSetTime.setText(QueryData.SET_TIME.getInfo());
+        btnSetTime.setCallbackData(QueryData.SET_TIME.getData());
+
 
         InlineKeyboardButton btnCountingTimeNewYear = new InlineKeyboardButton();
         btnCountingTimeNewYear.setText(QueryData.COUNTING_NEW_YEAR.getInfo());
@@ -39,10 +47,11 @@ public class BoardService {
         btnMakeImageBirth.setCallbackData(QueryData.BIRTHDAY_CONGRATULATE.getData());
 
 
-        rowList.add(new ArrayList<>(List.of(btnCountingTimeJuma, btnCountingTimeNewYear)));
+        rowList.add(new ArrayList<>(List.of(btnSetTime)));
+        rowList.add(new ArrayList<>(List.of(btnCountingTimeJuma)));
 
         rowList.add(new ArrayList<>(List.of(btnMakeImageJuma)));
-        rowList.add(new ArrayList<>(List.of(btnMakeImageNewYear)));
+//        rowList.add(new ArrayList<>(List.of(btnMakeImageNewYear)));
         rowList.add(new ArrayList<>(List.of(btnMakeImageBirth)));
 
         inlineKeyboardMarkup.setKeyboard(rowList);
@@ -242,6 +251,28 @@ public class BoardService {
 
         inlineKeyboardMarkup.setKeyboard(rowList);
         return inlineKeyboardMarkup;
+    }
+
+    public ReplyKeyboardMarkup sendLocation() {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        KeyboardRow keyboardFirstRow = new KeyboardRow();
+
+        KeyboardButton btn = new KeyboardButton();
+        btn.setRequestLocation(true);
+        btn.setText("\uD83D\uDCCD Joylashuvni yuborish \uD83D\uDCCD");
+        keyboardFirstRow.add(btn);
+
+        keyboard.add(keyboardFirstRow);
+        replyKeyboardMarkup.setKeyboard(keyboard);
+        return replyKeyboardMarkup;
     }
 
 }

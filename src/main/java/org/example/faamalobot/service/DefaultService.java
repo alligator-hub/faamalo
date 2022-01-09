@@ -2,7 +2,6 @@ package org.example.faamalobot.service;
 
 
 import org.example.faamalobot.entity.Follower;
-import org.example.faamalobot.enums.Statics;
 import org.example.faamalobot.model.TimeDto;
 import org.example.faamalobot.model.UpdateDto;
 import org.example.faamalobot.repo.FollowerRepo;
@@ -50,11 +49,14 @@ public class DefaultService {
         return followerRepo.save(follower);
     }
 
-    public TimeDto getBetweenTwoTime(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
+    public TimeDto getBetweenTwoTime(LocalDateTime fromDateTime, LocalDateTime toDateTime, String zoneId) {
 
         LocalDateTime tempDateTime = LocalDateTime.from(fromDateTime);
 
         TimeDto timeDto = new TimeDto();
+
+        timeDto.setZoneId(zoneId == null ? "UTC" : zoneId);
+
 
         timeDto.setYears((int) tempDateTime.until(toDateTime, ChronoUnit.YEARS));
         tempDateTime = tempDateTime.plusYears(timeDto.getYears());
@@ -72,6 +74,7 @@ public class DefaultService {
         tempDateTime = tempDateTime.plusMinutes(timeDto.getMinutes());
 
         timeDto.setSeconds((int) tempDateTime.until(toDateTime, ChronoUnit.SECONDS));
+
 
         return timeDto;
     }
