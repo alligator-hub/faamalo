@@ -50,7 +50,7 @@ public class DataLoader implements CommandLineRunner {
             fontList.add(new MyFont("comic-sans-ms", "ComicSansMS.ttf"));
             fontList.add(new MyFont("gabriola", "gabriola.ttf"));
 
-            fontRepo.saveAll(fontList);
+//            fontRepo.saveAll(fontList);
 
             List<Template> templates = new ArrayList<>();
 

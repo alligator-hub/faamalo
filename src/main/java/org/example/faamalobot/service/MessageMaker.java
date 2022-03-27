@@ -1,20 +1,17 @@
 package org.example.faamalobot.service;
 
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.CopyMessage;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
-import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
 import java.io.File;
-import java.util.List;
 
 @Service
 public class MessageMaker {
@@ -36,6 +33,9 @@ public class MessageMaker {
         sendMessage.setParseMode(ParseMode.HTML);
         return sendMessage;
     }
+
+
+
     public SendMessage make(Long chatId, String message, ReplyKeyboardMarkup board) {
         SendMessage sendMessage = new SendMessage(String.valueOf(chatId), message);
         sendMessage.setReplyMarkup(board);
@@ -65,4 +65,12 @@ public class MessageMaker {
     private ReplyKeyboardRemove removeBtn() {
         return new ReplyKeyboardRemove(true, false);
     }
+
+    public CopyMessage copy(String channelUsername, Integer postId, Long chatId, boolean notification) {
+        CopyMessage copyMessage = new CopyMessage(chatId + "", channelUsername, postId);
+        copyMessage.setDisableNotification(!notification);
+        return copyMessage;
+    }
+
+
 }

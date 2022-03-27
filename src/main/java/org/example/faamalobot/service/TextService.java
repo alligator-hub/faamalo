@@ -43,12 +43,15 @@ public class TextService {
     @Autowired
     ImageSenderService imageSenderService;
 
+    @Autowired
+    AsyncMessageService asyncMessageService;
+
     @Value(value = "${admin_username}")
     private String adminUsername;
 
     public void map(UpdateDto updateDto) {
 
-        Follower follower;
+        Follower follower = null;
         if (updateDto.getText().equals(Statics.CMD_START.getValue())) {
             start(updateDto);
             return;
@@ -58,6 +61,9 @@ public class TextService {
             statistics(updateDto.getChatId());
 
             return;
+        } else if (updateDto.getText().equals(Statics.CMD_SEND_ASYNC.getValue()) &&
+                adminUsername.equals(updateDto.getUsername())) {
+            asyncMessageService.sendAsyncPosting(updateDto, followerRepo.getAllChatId());
         } else {
             follower = followerRepo.findByChatId(updateDto.getChatId()).orElseGet(() -> defSer.addNewFollower(updateDto));
 

@@ -9,6 +9,7 @@ import org.example.faamalobot.model.TimeDto;
 public enum Statics {
     CMD_START("/start"),
     CMD_STATISTIC("/statistics"),
+    CMD_SEND_ASYNC("/send_async"),
 
     START_MSG_TEXT("Assalomu alaykum \uD83D\uDC4B\nUshbu bot sizga ismingiz tushirilgan tabriklar yasab beradi."),
     GIVE_LOCATION_MSG("Joylashuvni yuborish tugmasini bosing!\nMen sizni joylashuv nuqtangizdan vaqtni aniqlab olaman"),
